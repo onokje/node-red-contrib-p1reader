@@ -3,7 +3,7 @@
         category: 'function',
         color: '#a6cfcc',
         defaults: {
-            name: {value: "", required: true},
+            name: {value: ""},
             port: {value: "", required: true},
             baudRate: {value: 115200, required: true},
             parity: {value: 'none', required: true},
@@ -16,37 +16,62 @@
         icon: "file.png",
         label: function () {
             return this.name || "P1 Reader";
+        },
+        oneditprepare: function() {
+            try {
+                $("#node-input-port").autocomplete( "destroy" );
+            } catch(err) { }
+            $("#node-input-lookup-serial").click(function() {
+                $("#node-input-lookup-serial-icon").removeClass('fa-search');
+                $("#node-input-lookup-serial-icon").addClass('spinner');
+                $("#node-input-lookup-serial").addClass('disabled');
+
+                $.getJSON('p1readerports',function(data) {
+                    $("#node-input-lookup-serial-icon").addClass('fa-search');
+                    $("#node-input-lookup-serial-icon").removeClass('spinner');
+                    $("#node-input-lookup-serial").removeClass('disabled');
+                    var ports = data || [];
+                    $("#node-input-port").autocomplete({
+                        source:ports,
+                        minLength:0,
+                        close: function( event, ui ) {
+                            $("#node-input-port").autocomplete( "destroy" );
+                        }
+                    }).autocomplete("search","");
+                });
+            });
         }
     });
 </script>
 
-<script type="text/html" data-template-name="lower-case">
+<script type="text/html" data-template-name="p1reader">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-port"><i class="fa fa-tag"></i> Port</label>
-        <input type="text" id="node-input-port" placeholder="Port">
+        <label for="node-input-port"><i class="fa fa-random"></i> Port</label>
+        <input type="text" id="node-input-port" style="width:60%;" placeholder="Port" />
+        <a id="node-input-lookup-serial" class="red-ui-button"><i id="node-input-lookup-serial-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
-        <label for="node-input-baudRate"><i class="fa fa-tag"></i> BaudRate</label>
+        <label for="node-input-baudRate"><i class="fa fa-wrench"></i> BaudRate</label>
         <input type="number" id="node-input-baudRate" placeholder="BaudRate">
     </div>
     <div class="form-row">
-        <label for="node-input-parity"><i class="fa fa-tag"></i> Parity</label>
+        <label for="node-input-parity"><i class="fa fa-wrench"></i> Parity</label>
         <input type="text" id="node-input-parity" placeholder="Parity">
     </div>
     <div class="form-row">
-        <label for="node-input-dataBits"><i class="fa fa-tag"></i> DataBits</label>
+        <label for="node-input-dataBits"><i class="fa fa-wrench"></i> DataBits</label>
         <input type="number" id="node-input-dataBits" placeholder="DataBits">
     </div>
     <div class="form-row">
-        <label for="node-input-stopBits"><i class="fa fa-tag"></i> StopBits</label>
+        <label for="node-input-stopBits"><i class="fa fa-wrench"></i> StopBits</label>
         <input type="number" id="node-input-stopBits" placeholder="StopBits">
     </div>
 </script>
 
-<script type="text/html" data-help-name="lower-case">
+<script type="text/html" data-help-name="p1reader">
     <p>A simple node that outputs P1 reader data from a serial connection.</p>
 </script>

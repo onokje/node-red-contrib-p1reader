@@ -1,6 +1,7 @@
 # Node red contrib P1 reader
 
-Node red node for reading P! powermeter data from a serial connection.
+Node red node for reading P1 powermeter data from a serial connection.
+This package is based on [Node-P1-reader](https://github.com/ruudverheijden/node-p1-reader). 
 
 ## How to install:
 Run `npm install node-red-contrib-p1reader --save` or just install it from the Node-red dashboard (manage palette).
