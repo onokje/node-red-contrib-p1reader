@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    RED.nodes.registerType('p1reader', {
+        category: 'function',
+        color: '#a6cfcc',
+        defaults: {
+            name: {value: "", required: true},
+            port: {value: "", required: true},
+            baudRate: {value: 115200, required: true},
+            parity: {value: 'none', required: true},
+            dataBits: {value: 8, required: true},
+            stopBits: {value: 1, required: true},
+            debug: {value: false},
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: "file.png",
+        label: function () {
+            return this.name || "P1 Reader";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="lower-case">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="fa fa-tag"></i> Port</label>
+        <input type="text" id="node-input-port" placeholder="Port">
+    </div>
+    <div class="form-row">
+        <label for="node-input-baudRate"><i class="fa fa-tag"></i> BaudRate</label>
+        <input type="number" id="node-input-baudRate" placeholder="BaudRate">
+    </div>
+    <div class="form-row">
+        <label for="node-input-parity"><i class="fa fa-tag"></i> Parity</label>
+        <input type="text" id="node-input-parity" placeholder="Parity">
+    </div>
+    <div class="form-row">
+        <label for="node-input-dataBits"><i class="fa fa-tag"></i> DataBits</label>
+        <input type="number" id="node-input-dataBits" placeholder="DataBits">
+    </div>
+    <div class="form-row">
+        <label for="node-input-stopBits"><i class="fa fa-tag"></i> StopBits</label>
+        <input type="number" id="node-input-stopBits" placeholder="StopBits">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="lower-case">
+    <p>A simple node that outputs P1 reader data from a serial connection.</p>
+</script>
