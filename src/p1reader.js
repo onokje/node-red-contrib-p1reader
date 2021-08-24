@@ -27,12 +27,12 @@ module.exports = function(RED) {
         });
 
         p1Reader.on('connected', function() {
-            node.info("Connection to P1 meter successful.");
+            node.log("Connection to P1 meter successful.");
             node.status({fill:"green",shape:"dot",text:"connected"});
         });
 
         p1Reader.on('close', function() {
-            node.info("Connection to P1 meter closed.");
+            node.log("Connection to P1 meter closed.");
             node.status({fill:"red",shape:"dot",text:"disconnected"});
         });
 
