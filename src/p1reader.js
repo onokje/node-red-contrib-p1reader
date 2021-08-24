@@ -22,17 +22,17 @@ module.exports = function(RED) {
         });
 
         p1Reader.on('error', err => {
-            this.error("Connection to P1 meter failed. Error details: " + err);
+            node.error("Connection to P1 meter failed. Error details: " + err);
             node.status({fill:"red",shape:"dot",text:"disconnected"});
         });
 
         p1Reader.on('connected', function() {
-            this.info("Connection to P1 meter successful.");
+            node.info("Connection to P1 meter successful.");
             node.status({fill:"green",shape:"dot",text:"connected"});
         });
 
         p1Reader.on('close', function() {
-            this.info("Connection to P1 meter closed.");
+            node.info("Connection to P1 meter closed.");
             node.status({fill:"red",shape:"dot",text:"disconnected"});
         });
 
