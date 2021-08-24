@@ -13,7 +13,7 @@
         },
         inputs: 0,
         outputs: 1,
-        icon: "file.png",
+        icon: "font-awesome/fa-tachometer",
         label: function () {
             return this.name || "P1 Reader";
         },
@@ -55,23 +55,52 @@
         <a id="node-input-lookup-serial" class="red-ui-button"><i id="node-input-lookup-serial-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
-        <label for="node-input-baudRate"><i class="fa fa-wrench"></i> BaudRate</label>
-        <input type="number" id="node-input-baudRate" placeholder="BaudRate">
+        <p><i class="fa fa-wrench"></i> <span>Serial connection settings</span></p>
+        <table width="100%">
+            <tr>
+                <td width="110px">Baudrate</td>
+                <td width="70px">Databits</td>
+                <td width="80px">Parity</td>
+                <td width="70px">Stopbits</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="node-input-baudRate" style="width:100px">
+                </td>
+                <td>
+                    <select type="text" id="node-input-dataBits" style="width:70px;">
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                    </select>
+                </td>
+                <td>
+                    <select type="text" id="node-input-parity" style="width:80px;">
+                        <option value="none">none</option>
+                        <option value="even">even</option>
+                        <option value="mark">mark</option>
+                        <option value="odd">odd</option>
+                        <option value="space">space</option>
+                    </select>
+                </td>
+                <td>
+                    <select type="text" id="node-input-stopBits" style="width:70px;">
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div class="form-row">
-        <label for="node-input-parity"><i class="fa fa-wrench"></i> Parity</label>
-        <input type="text" id="node-input-parity" placeholder="Parity">
-    </div>
-    <div class="form-row">
-        <label for="node-input-dataBits"><i class="fa fa-wrench"></i> DataBits</label>
-        <input type="number" id="node-input-dataBits" placeholder="DataBits">
-    </div>
-    <div class="form-row">
-        <label for="node-input-stopBits"><i class="fa fa-wrench"></i> StopBits</label>
-        <input type="number" id="node-input-stopBits" placeholder="StopBits">
+    <div>
+        <label for="node-input-debug"><input type="checkbox" id="node-input-debug" style="position: relative; top: -4px; margin-right: 5px;" /> <i class="fa fa-random"></i> <span >Debug mode</span></label>
+        <p>Debug mode outputs extra messages to the console.</p>
     </div>
 </script>
 
 <script type="text/html" data-help-name="p1reader">
     <p>A simple node that outputs P1 reader data from a serial connection.</p>
+    <p>See this page for more documentation on how to configure this node: <a href="https://github.com/ruudverheijden/node-p1-reader">https://github.com/ruudverheijden/node-p1-reader</a></p>
 </script>
+

@@ -13,12 +13,27 @@ module.exports = function(RED) {
             parity: config.parity,
             dataBits: config.dataBits,
             stopBits: config.stopBits,
-            debug: true
+            debug: config.debug
         });
 
         p1Reader.on('reading', function(data) {
             const msg = {payload: data};
             node.send(msg);
+        });
+
+        p1Reader.on('error', err => {
+            this.error("Connection to P1 meter failed. Error details: " + err);
+            node.status({fill:"red",shape:"dot",text:"disconnected"});
+        });
+
+        p1Reader.on('connected', function() {
+            this.info("Connection to P1 meter successful.");
+            node.status({fill:"green",shape:"dot",text:"connected"});
+        });
+
+        p1Reader.on('close', function() {
+            this.info("Connection to P1 meter closed.");
+            node.status({fill:"red",shape:"dot",text:"disconnected"});
         });
 
     }
@@ -27,7 +42,7 @@ module.exports = function(RED) {
     RED.httpAdmin.get("/p1readerports", RED.auth.needsPermission("arduino.read"), function(req,res) {
         SP.list().then(
             ports => {
-                const a = ports.map(p => p.comName);
+                const a = ports.map(p => p.path);
                 res.json(a);
             },
             err => {
