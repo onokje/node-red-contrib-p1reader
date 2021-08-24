@@ -7,8 +7,8 @@ This package is based on [Node-P1-reader](https://github.com/ruudverheijden/node
 Run `npm install node-red-contrib-p1reader` or just install it from the Node-red dashboard (manage palette).
 
 ## How to use:
-This package one has one node, and it outputs messages as they come in via the serial connection.
-Other then the serial connection itself there is no configuration. 
+This package has one node, and it outputs messages as they come in via the serial connection.
+Other than the serial connection itself there is no configuration. 
 If you need details on what serial configuration you need for your smartmeter, look at the [readme for the node-p1-reader](https://github.com/ruudverheijden/node-p1-reader) library.
 
 ### Input
